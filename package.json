@@ -1,0 +1,11 @@
+{
+  "name": "com.lumos.basedevelopkit",
+  "version": "1.0.0",
+  "displayName": "Base Develop Kit",
+  "description": "description",
+  "unity": "2019.1",
+  "author": {
+    "name": "lumos",
+    "email": "lumos.wge@gmail.com"
+  }
+}
