@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class SingletonMonoGlobal<T> : SingletonMono<T> where T : SingletonMonoGlobal<T>
+public abstract class SingletonGlobalMono<T> : SingletonMono<T> where T : SingletonGlobalMono<T>
 {
     public static T Instance
     {
@@ -8,7 +8,7 @@ public abstract class SingletonMonoGlobal<T> : SingletonMono<T> where T : Single
         {
             if (applicationIsQuitting) return null;
 
-            if (Instance == null)
+            if (_instance == null)
             {
                 _instance = FindAnyObjectByType<T>();
 
@@ -26,8 +26,7 @@ public abstract class SingletonMonoGlobal<T> : SingletonMono<T> where T : Single
     }
     private static T _instance;
     
-    private static bool applicationIsQuitting;
-
+    private static bool applicationIsQuitting = false;
  
   
     protected override void Awake()
