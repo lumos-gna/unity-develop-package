@@ -3,6 +3,7 @@
 /// </summary>
 public enum ManagerType
 {
+    SCENE,
     UI,
     GAME, // 최하단 유지
 }

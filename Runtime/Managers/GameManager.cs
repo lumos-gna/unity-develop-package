@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GameManager : SingletonGlobalMono<GameManager>, IManager
+public class GameManager : SingletonGlobalMono<GameManager>
 {
     #region > PROPERTIES
     
@@ -24,8 +24,6 @@ public class GameManager : SingletonGlobalMono<GameManager>, IManager
     {
         base.Awake();
         
-        _managers.Add(Instance);
-
         CreateManagers();
         
         StartCoroutine(InitManagers());
@@ -36,16 +34,8 @@ public class GameManager : SingletonGlobalMono<GameManager>, IManager
     #region  > INIT
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    public static void PreInit()
-    {
-        var _ = Instance;
-    }
+    public static void PreInit() => _ = Instance;
     
-    public void Init()
-    {
-        IsInitialized = true;
-    }
-
     private IEnumerator InitManagers()
     {
         _managers = _managers.OrderBy(manager => manager.ManagerType).ToList();
@@ -57,6 +47,9 @@ public class GameManager : SingletonGlobalMono<GameManager>, IManager
             yield return new WaitUntil(() => manager.IsInitialized);
             DebugUtil.Log(" INIT COMPLETE ", $" {manager.ManagerType} ");
         }
+        
+        IsInitialized = true;
+        DebugUtil.Log("", " All Managers INIT COMPLETE ");
     }
 
     #endregion
@@ -68,6 +61,7 @@ public class GameManager : SingletonGlobalMono<GameManager>, IManager
     /// </summary>
     private void CreateManagers()
     {
+        CreateManager<GameSceneManager>();
         CreateManager<UIManager>();
     }
     

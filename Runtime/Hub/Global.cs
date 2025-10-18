@@ -4,11 +4,16 @@ using UnityEngine;
 
 public static class Global
 {
-    #region  > FIELD
-    
+    #region  > PROPERTIES
+
     public static UIManager UI => Get<UIManager>();
+    public static GameSceneManager Scene => Get<GameSceneManager>();
     
-    private static readonly Dictionary<Type, MonoBehaviour> _managers = new();
+    #endregion
+
+    #region > FIELDS
+
+    private static readonly Dictionary<Type, MonoBehaviour> _instances = new();
 
     #endregion
     
@@ -16,9 +21,9 @@ public static class Global
     
     private static T Get<T>() where T : MonoBehaviour
     {
-        if (_managers.TryGetValue(typeof(T), out var manager))
+        if (_instances.TryGetValue(typeof(T), out var instance))
         {
-            return manager as T;    
+            return instance as T;    
         }
 
         return null;
@@ -28,9 +33,14 @@ public static class Global
 
     #region REGISTER
 
-    public static void Register<T>(T manager) where T : MonoBehaviour
+    public static void Register<T>(T instance) where T : MonoBehaviour
     {
-        _managers.TryAdd(typeof(T), manager);
+        _instances.TryAdd(typeof(T), instance);
+    }
+    
+    public static void Unregister<T>(T instance) where T : MonoBehaviour
+    {
+        _instances.Remove(instance.GetType());
     }
 
     #endregion
