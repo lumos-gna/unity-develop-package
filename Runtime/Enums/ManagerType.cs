@@ -4,5 +4,5 @@
 public enum ManagerType
 {
     UI,
-    Game, // 최하단 유지
+    GAME, // 최하단 유지
 }

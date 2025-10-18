@@ -7,7 +7,7 @@ public class GameManager : SingletonGlobalMono<GameManager>, IManager
 {
     #region > PROPERTIES
     
-    public ManagerType ManagerType => ManagerType.Game;
+    public ManagerType ManagerType => ManagerType.GAME;
     public bool IsInitialized { get; private set; }
  
     #endregion
@@ -55,7 +55,7 @@ public class GameManager : SingletonGlobalMono<GameManager>, IManager
             manager.Init();
 
             yield return new WaitUntil(() => manager.IsInitialized);
-            Debug.Log($"[ ✅ INIT COMPLETE - {manager.ManagerType} ]");
+            DebugUtil.Log(" INIT COMPLETE ", $" {manager.ManagerType} ");
         }
     }
 
