@@ -7,7 +7,7 @@ public class GameManager : SingletonGlobalMono<GameManager>, IManager
 {
     #region > PROPERTIES
     
-    public GlobalEnums.ManagerType ManagerType => GlobalEnums.ManagerType.Game;
+    public ManagerType ManagerType => ManagerType.Game;
     public bool IsInitialized { get; private set; }
  
     #endregion

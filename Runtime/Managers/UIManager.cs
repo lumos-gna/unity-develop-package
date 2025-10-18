@@ -4,7 +4,7 @@ public class UIManager : MonoBehaviour, IManager
 {
     #region > PROPERTIES
     
-    public GlobalEnums.ManagerType ManagerType => GlobalEnums.ManagerType.UI;
+    public ManagerType ManagerType => ManagerType.UI;
     public bool IsInitialized { get; private set; }
     
     #endregion
